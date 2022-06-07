@@ -356,6 +356,20 @@ namespace Model.Anadil.EtiketBas
                                         res_report.PrinterName = printerName;
                                         res_report.DisplayName = res_report.DisplayName + "_" + Guid.NewGuid().ToString();
                                         res_report.ShowPrintStatusDialog = false;
+
+                                        try
+                                        {
+                                            if (System.IO.Directory.Exists(AlwaysRoot + "RaporSablonlari\\PDF\\"))
+                                            {
+                                                string pdfFilePath = AlwaysRoot + "RaporSablonlari\\PDF\\" + res_report.DisplayName + ".pdf";
+                                                res_report.ExportToPdf(pdfFilePath);
+                                                Trace.WriteLine("UYARI!!! : Şablon PDF olarak kayıt edildi. Etiket basma hızının düşmemesi için en yakın zamanda RaporSablonlari altındaki PDF klasörünü siliniz.");
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Trace.WriteLine("PDF olarak kayıt edilemedi : " + ex.Message);
+                                        }
                                         res_report.Print();
 
                                     }

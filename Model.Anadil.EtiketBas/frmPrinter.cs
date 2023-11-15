@@ -146,22 +146,27 @@ namespace Model.Anadil.EtiketBas
         {
             foreach (DataRow item in (dtgridView.DataSource as DataTable).Select("rowstate=1"))
             {
-                SetPrinterName((string)item["guid"], (string)item["yaziciAdi"]);
+                string yaziciAdi = "";
+                if (item["yaziciAdi"] != DBNull.Value)
+                { 
+                    yaziciAdi = (string)item["yaziciAdi"];
+                }
+                SetPrinterName((string)item["guid"], yaziciAdi);
             }
             this.Close();
         }
 
         private void btnIptal_Click(object sender, EventArgs e)
         {
-            if (this.GReportGuid != "" && this.GReportGuid != null)
-            {
-                string sprinterName = DotNetObject.SeciliYaziciAdiGetir(this.GReportGuid);
-                if (sprinterName != "" || sprinterName != null)
-                {
-                    if (MessageBox.Show("Yazıcı seçmeden işlem yapamazsınız. Çıktı alınmayacak. Devam etmek istiyor musunuz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                        return;
-                }
-            }
+            //if (this.GReportGuid != "" && this.GReportGuid != null)
+            //{
+            //    string sprinterName = DotNetObject.SeciliYaziciAdiGetir(this.GReportGuid);
+            //    if (string.IsNullOrEmpty(sprinterName))
+            //    {
+            //        if (MessageBox.Show("Yazıcı seçmeden işlem yapamazsınız. Çıktı alınmayacak. Devam etmek istiyor musunuz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            //            return;
+            //    }
+            //}
             this.Visible = false;
             //this.Close();
         }

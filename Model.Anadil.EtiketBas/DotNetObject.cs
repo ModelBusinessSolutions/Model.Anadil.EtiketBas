@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraReports.UI;
+﻿using DevExpress.XtraPrinting;
+using DevExpress.XtraReports.UI;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Model.Anadil.EtiketBas
 {
     public class DotNetObject : Model.Anadil.Interop.IDotNetObject
     {
+
         private Model.Anadil.Interop.DotNetObject netobj;
         private string MesajHata = ":H:";//HATA
         private string MesajUyari = ":U:";//UYARI
@@ -98,6 +100,7 @@ namespace Model.Anadil.EtiketBas
             }
         }
 
+        static Int16 copies = 1;
         public bool Create(Model.Anadil.Interop.DotNetObject netobj)
         {
             Trace.WriteLine("Model.Anadil.Interop.DotNetObject NESNESİ OLUŞTURULDU YENİ!!!");
@@ -280,6 +283,7 @@ namespace Model.Anadil.EtiketBas
                 SQLPassword = parameters[4];
                 string pGuid = parameters[5], pVersiyon = parameters[6], pCmdStr = parameters[7];
                 string pProgramNo = parameters[8];
+                int PrintCopies = Convert.ToInt16(parameters[9]);
                 List<string> pCheckList = parameters.Where(x => x.StartsWith(":K:")).Select(x => x.Remove(0, 3)).ToList();
 
                 string printerName = SeciliYaziciAdiGetir(pGuid);
@@ -356,6 +360,11 @@ namespace Model.Anadil.EtiketBas
                                         res_report.PrinterName = printerName;
                                         res_report.DisplayName = res_report.DisplayName + "_" + Guid.NewGuid().ToString();
                                         res_report.ShowPrintStatusDialog = false;
+                                        res_report.ShowPrintMarginsWarning = false;
+                                        res_report.PrintingSystem.ShowMarginsWarning = false;
+                                        copies= (short)PrintCopies;
+                                        res_report.PrintingSystem.StartPrint += new PrintDocumentEventHandler(PrintingSystem_StartPrint);
+                                        res_report.PrintingSystem.EndPrint += new EventHandler(PrintingSystem_EndPrint);
 
                                         try
                                         {
@@ -635,6 +644,20 @@ namespace Model.Anadil.EtiketBas
                 Trace.WriteLine("EtiketLog LOG HATASI : " + ex.Message);
             }
         }
+
+
+        static void PrintingSystem_StartPrint(object sender, DevExpress.XtraPrinting.PrintDocumentEventArgs e)
+        {
+            e.PrintDocument.PrinterSettings.Collate = true;
+            e.PrintDocument.PrinterSettings.Copies = copies;
+        }
+
+        void PrintingSystem_EndPrint(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 
     public class PrintItem

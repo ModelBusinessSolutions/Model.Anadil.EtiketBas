@@ -305,7 +305,7 @@ namespace Model.Anadil.EtiketBas
                     {
                         System.Threading.Thread.Sleep(100);
                         //Trace.WriteLine("BEKLIYOR...");
-                        //EtiketLog(pCmdStr, "BEKLIYOR", Guid.NewGuid().ToString(), "1");
+                        //EtiketLogger.Log(pCmdStr, "BEKLIYOR", Guid.NewGuid().ToString(), "1");
                     }
 
                     layoutFilePath = AlwaysRoot + "RaporSablonlari\\" + pGuid + "_v" + pVersiyon + ".repx"; //Gelen parametreler ile ilgili şablonun dizinde varlığını kontrol etmek için en başta pathi oluşturuyoruz.
@@ -353,7 +353,7 @@ namespace Model.Anadil.EtiketBas
                                                 return ret;
                                             }
                                         }
-                                        EtiketLog(pCmdStr, pProgramNo, pGuid, pVersiyon);
+                                        EtiketLogger.Log(pCmdStr, pProgramNo, pGuid, pVersiyon);
                                         res_report.DataAdapter = daData;
                                         res_report.DataSource = dsData;
                                         res_report.DataMember = "Table";
@@ -551,6 +551,7 @@ namespace Model.Anadil.EtiketBas
 
         private string DataCheck(XtraReport xrReport, DataTable dataTable, List<string> checkList)
         {
+ 
             string retStr = "";
             foreach (Band band in xrReport.Bands)
             {
@@ -560,40 +561,39 @@ namespace Model.Anadil.EtiketBas
                     string fieldName = "";
                     if ((binds != null) && (binds.Count > 0))
                     {
-                        //Trace.WriteLine("<<<<<<<<< DATABINDINGS >>>>>>>>>>>>>");
                         XRBinding bind = binds[0];
                         string dataMember = bind.DataMember;
-                        //Trace.WriteLine("dataMember = " + dataMember);
                         string[] names = dataMember.Split('.');//table.column
                         if (names.Length >= 1)
                         {
-                            //Trace.WriteLine("names.Length = " + names.Length.ToString());
-                            //field name
                             fieldName = names[names.Length - 1];
-                            //Trace.WriteLine("fieldName = " + fieldName);
                         }
                     }
                     else
                     {
-                        //Trace.WriteLine("<<<<<<<<< TEXT >>>>>>>>>>>>>");
                         if (control.Text.IndexOf("[") > -1 && control.Text.IndexOf("]") > -1)
                         {
                             fieldName = control.Text.Replace("[", string.Empty).Replace("]", string.Empty);
                         }
                     }
 
+                    if(fieldName== "musteri_icerik_anlami1")
+                    {
+                        Trace.WriteLine(fieldName);
+                    }
+ 
+
                     if (fieldName != "" && fieldName != null)
                     {
                         for (int i = 0; i < checkList.Count; i++)
                         {
-                            //int iii = checkList[i].IndexOf(fieldName);
+
                             if (checkList[i].IndexOf("[" + fieldName + "]") > -1)
-                            {
+                            {                                
                                 DataRow[] dataRows = dataTable.Select(checkList[i]);
                                 if (dataRows.Length > 0)
                                 {
                                     string mesaj = "Çıktı alırken " + checkList[i].Substring(0, checkList[i].IndexOf(' ')) + " alanı boş olamaz.";
-                                    //MessageBox.Show(mesaj, "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     if (_gueueInit)
                                     {
                                         frmInvoke.Invoke((MethodInvoker)delegate
@@ -618,34 +618,7 @@ namespace Model.Anadil.EtiketBas
             return "";
         }
 
-        public static void EtiketLog(string sql, string programNo, string reportGuid, string reportVersiyon)
-        {
-            try
-            {
-                using (SqlConnection connLog = new SqlConnection(ConStr))
-                {
-                    connLog.Open();
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        string cmdText = "INSERT INTO MODEL_HISTORY.dbo.etiket_bas_log(sql,username,program_no,report_guid,report_versiyon) VALUES(@sql,'" + ErpKullaniciAdi + "','" + programNo + "','" + reportGuid + "','" + reportVersiyon + "')";
-                        cmd.CommandText = cmdText;
-                        cmd.Connection = connLog;
-                        //= new SqlCommand(cmdText, connLog);
-                        cmd.Parameters.AddWithValue("@sql", sql);
-                        cmd.CommandType = CommandType.Text;
-                        cmd.CommandTimeout = 600;
-                        cmd.ExecuteNonQuery();
-                        connLog.Close();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine("EtiketLog LOG HATASI : " + ex.Message);
-            }
-        }
-
-
+    
         static void PrintingSystem_StartPrint(object sender, DevExpress.XtraPrinting.PrintDocumentEventArgs e)
         {
             e.PrintDocument.PrinterSettings.Collate = true;
@@ -660,57 +633,5 @@ namespace Model.Anadil.EtiketBas
 
     }
 
-    public class PrintItem
-    {
-        public List<string> parameters = new List<string>();
-        public PrintItem next;
-
-        public PrintItem(List<string> param)
-        {
-            this.parameters = param;
-
-        }
-    }
-
-    public class Queue
-    {
-        object sync = new object();
-        PrintItem head;
-        PrintItem tail;
-
-        public void Add(PrintItem pi)
-        {
-            lock (this.sync)
-            {
-                if (this.head == null)
-                {
-                    this.head = pi;
-                    this.tail = pi;
-                }
-                else
-                {
-                    this.tail.next = pi;
-                    this.tail = pi;
-                }
-            }
-        }
-
-        public PrintItem Pop()
-        {
-            lock (this.sync)
-            {
-                var ret = this.head;
-                this.head = this.head.next;
-                return ret;
-            }
-        }
-
-        public bool Any()
-        {
-            lock (this.sync)
-            {
-                return this.head != null;
-            }
-        }
-    }
+ 
 }

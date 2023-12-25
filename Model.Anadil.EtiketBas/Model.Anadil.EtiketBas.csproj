@@ -79,28 +79,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DotNetObject.cs" />
-    <Compile Include="frmMessageBox.cs">
+    <Compile Include="Forms\frmMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMessageBox.Designer.cs">
+    <Compile Include="Forms\frmMessageBox.Designer.cs">
       <DependentUpon>frmMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPrinter.cs">
+    <Compile Include="Forms\frmPrinter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPrinter.Designer.cs">
+    <Compile Include="Forms\frmPrinter.Designer.cs">
       <DependentUpon>frmPrinter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Log.cs" />
-    <Compile Include="PrintItem.cs" />
+    <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\PrintItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queue.cs" />
+    <Compile Include="Utils\Queue.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmMessageBox.resx">
+    <EmbeddedResource Include="Forms\frmMessageBox.resx">
       <DependentUpon>frmMessageBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPrinter.resx">
+    <EmbeddedResource Include="Forms\frmPrinter.resx">
       <DependentUpon>frmPrinter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

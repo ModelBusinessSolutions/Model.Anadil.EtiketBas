@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
-namespace Model.Anadil.EtiketBas
+namespace Model.Anadil.EtiketBas.Utils
 {
     public class EtiketLogger
     {

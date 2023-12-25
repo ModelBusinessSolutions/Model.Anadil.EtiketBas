@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
 using Microsoft.Win32;
+using Model.Anadil.EtiketBas.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;

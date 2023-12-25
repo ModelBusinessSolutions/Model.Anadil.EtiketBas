@@ -1,4 +1,7 @@
-﻿public class Queue
+﻿
+namespace Model.Anadil.EtiketBas.Utils
+{
+public class Queue
 {
     object sync = new object();
     PrintItem head;
@@ -38,4 +41,6 @@
             return this.head != null;
         }
     }
+}
+
 }

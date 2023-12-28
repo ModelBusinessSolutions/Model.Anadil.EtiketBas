@@ -23,7 +23,6 @@ namespace Model.Anadil.EtiketBas
         private string MesajUyari = ":U:";//UYARI
         //private string MesajBilgi = ":B:";//BİLGİ
         static string SQLServerIp, SQLServerName, SQLDatabase, SQLUser, SQLPassword;
-
         Queue queue;
         int queueCount = 0;
         bool _gueueInit;
@@ -334,6 +333,8 @@ namespace Model.Anadil.EtiketBas
                                 }
                             }
                         }
+
+          
                         using (XtraReport res_report = XtraReport.FromFile(layoutFilePath, true))
                         {
                             using (SqlDataAdapter daData = new SqlDataAdapter(pCmdStr, conn))

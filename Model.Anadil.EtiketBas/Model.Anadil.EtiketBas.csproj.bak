@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Model.Anadil.EtiketBas</RootNamespace>
     <AssemblyName>Model.Anadil.EtiketBas</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,48 +36,47 @@
     <Reference Include="AlwInterop">
       <HintPath>..\EDevletSrc\EDevletIDotNetObject\EDevlet\Model.Anadil.EDevlet\bin\Debug\AlwInterop.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.v15.1, Version=15.1.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Drawing.v16.1, Version=16.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
     </Reference>
-    <Reference Include="DevExpress.Pdf.v15.1.Core, Version=15.1.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Data.v16.1, Version=16.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
     </Reference>
-    <Reference Include="DevExpress.Printing.v15.1.Core, Version=15.1.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Pdf.v16.1.Core, Version=16.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
     </Reference>
-    <Reference Include="DevExpress.XtraPrinting.v15.1, Version=15.1.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Office.v16.1.Core, Version=16.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
     </Reference>
-    <Reference Include="DevExpress.Charts.v15.1.Core">
-      
+    <Reference Include="DevExpress.RichEdit.v16.1.Core, Version=16.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="DevExpress.XtraCharts.v15.1.Wizard">
-      
+    <Reference Include="DevExpress.RichEdit.v16.1.Export, Version=16.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="DevExpress.XtraCharts.v15.1">
-      
+    <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="DevExpress.PivotGrid.v15.1.Core">
-      
+    <Reference Include="DevExpress.XtraPrinting.v16.1, Version=16.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="DevExpress.Sparkline.v15.1.Core">
-      
+    <Reference Include="DevExpress.Charts.v16.1.Core">
     </Reference>
-    <Reference Include="DevExpress.CodeParser.v15.1">
-      
+    <Reference Include="DevExpress.XtraCharts.v16.1.Wizard">
     </Reference>
-    <Reference Include="DevExpress.Utils.v15.1.UI">
-      
+    <Reference Include="DevExpress.XtraCharts.v16.1">
     </Reference>
-    <Reference Include="DevExpress.XtraReports.v15.1.Extensions">
-      
+    <Reference Include="DevExpress.PivotGrid.v16.1.Core">
     </Reference>
-    <Reference Include="DevExpress.XtraReports.v15.1">
-      
+    <Reference Include="DevExpress.Sparkline.v16.1.Core">
+    </Reference>
+    <Reference Include="DevExpress.CodeParser.v16.1">
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.1.UI">
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.1.Extensions">
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.1">
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -92,30 +92,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DotNetObject.cs" />
-    <Compile Include="frmMessageBox.cs">
+    <Compile Include="Forms\frmMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMessageBox.Designer.cs">
+    <Compile Include="Forms\frmMessageBox.Designer.cs">
       <DependentUpon>frmMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPrinter.cs">
+    <Compile Include="Forms\frmPrinter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPrinter.Designer.cs">
+    <Compile Include="Forms\frmPrinter.Designer.cs">
       <DependentUpon>frmPrinter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Log.cs" />
-    <Compile Include="PrintItem.cs" />
+    <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\PrintItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queue.cs" />
+    <Compile Include="Utils\Queue.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmMessageBox.resx">
+    <EmbeddedResource Include="Forms\frmMessageBox.resx">
       <DependentUpon>frmMessageBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPrinter.resx">
+    <EmbeddedResource Include="Forms\frmPrinter.resx">
       <DependentUpon>frmPrinter.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

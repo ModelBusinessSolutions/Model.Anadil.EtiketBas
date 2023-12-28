@@ -65,7 +65,7 @@ namespace Test
             this.txtEBGuid.Name = "txtEBGuid";
             this.txtEBGuid.Size = new System.Drawing.Size(309, 20);
             this.txtEBGuid.TabIndex = 1;
-            this.txtEBGuid.Text = "7BC06973-0679-488D-BC6F-4DBC7CBEDD82";
+            this.txtEBGuid.Text = "67747287-3661-435A-8EC0-C2062951A5B5";
             // 
             // txtEBVersiyon
             // 
@@ -73,7 +73,7 @@ namespace Test
             this.txtEBVersiyon.Name = "txtEBVersiyon";
             this.txtEBVersiyon.Size = new System.Drawing.Size(43, 20);
             this.txtEBVersiyon.TabIndex = 2;
-            this.txtEBVersiyon.Text = "3";
+            this.txtEBVersiyon.Text = "4";
             // 
             // txtEBCmdStr
             // 
@@ -81,7 +81,8 @@ namespace Test
             this.txtEBCmdStr.Name = "txtEBCmdStr";
             this.txtEBCmdStr.Size = new System.Drawing.Size(309, 20);
             this.txtEBCmdStr.TabIndex = 3;
-            this.txtEBCmdStr.Text = "Exec frm_ban_hesap_hareketleri 39, \'MDL\'";
+            this.txtEBCmdStr.Text = "Exec frm_etiket_bas @cid=\'KRT\', @sGuid=\'7A843E48-A7C2-4C0D-AE99-FF7A988DE29E\',@se" +
+    "rinodan=1,@ref_no=\'331414250\'";
             // 
             // label1
             // 
@@ -212,6 +213,7 @@ namespace Test
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Test Ekranı";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
